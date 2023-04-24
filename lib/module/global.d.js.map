@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","sourcesContent":[]}
+{"version":3,"names":[],"sources":["global.d.ts"],"sourcesContent":["declare module 'react-native-interactable-reanimated';\n"],"mappings":""}

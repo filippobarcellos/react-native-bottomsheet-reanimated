@@ -190,17 +190,20 @@ const Index = forwardRef(
     const [keyboardHeight] = useKeyboard(keyboardAware);
     const [headerHeight, setHeaderHeight] = useState(0);
     const [currentSnap, setCurrentSnap] = useState(initialPosition);
-    const currentNomalizeSnap = useMemo(() => normalize(currentSnap), [
-      currentSnap,
-    ]);
-    const normalizeSnap = useMemo(() => getNormalizeSnaps(snapPoints), [
-      snapPoints,
-    ]);
-    const [_deltaY] = useState(new Animated.Value(Screen.height));
+    const currentNomalizeSnap = useMemo(
+      () => normalize(currentSnap),
+      [currentSnap]
+    );
+    const normalizeSnap = useMemo(
+      () => getNormalizeSnaps(snapPoints),
+      [snapPoints]
+    );
+    // const [_deltaY] = useState(new Animated.Value(Screen.height));
     const bottomPanel = useRef<any>();
-    const _snapPoints = useMemo(() => getSnapPoints(normalizeSnap), [
-      normalizeSnap,
-    ]);
+    const _snapPoints = useMemo(
+      () => getSnapPoints(normalizeSnap),
+      [normalizeSnap]
+    );
     const boundaries = useMemo(
       () =>
         overDrag
@@ -215,10 +218,8 @@ const Index = forwardRef(
     const isDismissWithPress = isBackDropDismissByPress
       ? isBackDropDismissByPress
       : false;
-    const [
-      isBottomSheetDismissed,
-      setIsBottomSheetDismissed,
-    ] = useState<boolean>(initialPosition === 0 || initialPosition === '0%');
+    const [isBottomSheetDismissed, setIsBottomSheetDismissed] =
+      useState<boolean>(initialPosition === 0 || initialPosition === '0%');
 
     const onDrawerSnap = (snap: any) => {
       const index = snap.nativeEvent.index;
@@ -309,7 +310,7 @@ const Index = forwardRef(
     return (
       <View style={styles.panelContainer} pointerEvents={'box-none'}>
         {/* Backdrop */}
-        {isBackDrop && (
+        {/* {isBackDrop && (
           <Animated.View
             pointerEvents={!isBottomSheetDismissed ? 'auto' : 'box-none'}
             style={[
@@ -330,7 +331,7 @@ const Index = forwardRef(
               },
             ]}
           />
-        )}
+        )} */}
 
         <Interactable.View
           dragEnabled={isModal ? false : dragHandler()}
@@ -339,7 +340,7 @@ const Index = forwardRef(
           snapPoints={_snapPoints}
           initialPosition={_initialPosition}
           boundaries={boundaries}
-          animatedValueY={isAnimatedYFromParent ? animatedValueY : _deltaY}
+          animatedValueY={isAnimatedYFromParent ? animatedValueY : 0}
           onSnap={onDrawerSnap}
         >
           {!isModal && isDismissWithPress && !isBottomSheetDismissed && (
